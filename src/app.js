@@ -13,15 +13,10 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(authMiddleware);
 
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(err.status || 500).json({
-      message: err.message || 'Hubo un error interno en el servidor',
-  });
-});
-
 app.use('/api/products', productsRouter);
-app.use('/api/cart', cartRouter);
+app.use('/api/carts', cartRouter);
+
+// Endpoint para verificar que el servidor está levantado
 app.get('/api/ping',(req,res)=>{
   res.setHeader('Content-Type','text/plain');
   res.status(200).send('pong');
