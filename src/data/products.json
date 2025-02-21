@@ -1,0 +1,276 @@
+[
+  {
+    "id": 1,
+    "title": "Catan",
+    "description": "Un juego de estrategia en el que los jugadores compiten por colonizar una isla.",
+    "code": "G001",
+    "price": 39.99,
+    "status": true,
+    "stock": 150,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen1.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Monopoly",
+    "description": "El clásico juego de mesa de bienes raíces.",
+    "code": "G002",
+    "price": 29.99,
+    "status": true,
+    "stock": 200,
+    "category": "Familiar",
+    "thumbnails": [
+      "ruta/imagen2.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Risk",
+    "description": "Un juego de estrategia global donde los jugadores luchan por dominar el mundo.",
+    "code": "G003",
+    "price": 24.99,
+    "status": true,
+    "stock": 120,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen3.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Codenames",
+    "description": "Un juego de palabras en el que los jugadores intentan adivinar las palabras correctas a partir de pistas.",
+    "code": "G004",
+    "price": 19.99,
+    "status": true,
+    "stock": 80,
+    "category": "Familiar",
+    "thumbnails": [
+      "ruta/imagen4.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Ticket to Ride",
+    "description": "Un juego de trenes donde los jugadores compiten por construir rutas a través de América.",
+    "code": "G005",
+    "price": 49.99,
+    "status": true,
+    "stock": 50,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen5.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Pandemic",
+    "description": "Un juego cooperativo donde los jugadores deben detener una pandemia global.",
+    "code": "G006",
+    "price": 39.99,
+    "status": true,
+    "stock": 95,
+    "category": "Cooperativo",
+    "thumbnails": [
+      "ruta/imagen6.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "7 Wonders",
+    "description": "Un juego de cartas donde los jugadores construyen maravillas del mundo antiguo.",
+    "code": "G007",
+    "price": 34.99,
+    "status": true,
+    "stock": 110,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen7.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Carcassonne",
+    "description": "Un juego de colocación de losetas donde los jugadores construyen paisajes medievales.",
+    "code": "G008",
+    "price": 29.99,
+    "status": true,
+    "stock": 140,
+    "category": "Familiar",
+    "thumbnails": [
+      "ruta/imagen8.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Azul",
+    "description": "Un juego de estrategia donde los jugadores colocan azulejos en patrones.",
+    "code": "G009",
+    "price": 39.99,
+    "status": true,
+    "stock": 75,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen9.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Dominion",
+    "description": "Un juego de construcción de mazos donde los jugadores compiten por dominar el reino.",
+    "code": "G010",
+    "price": 44.99,
+    "status": true,
+    "stock": 85,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen10.jpg"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Splendor",
+    "description": "Un juego de cartas donde los jugadores coleccionan gemas para obtener puntos.",
+    "code": "G011",
+    "price": 29.99,
+    "status": true,
+    "stock": 100,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen11.jpg"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "King of Tokyo",
+    "description": "Un juego de dados donde los jugadores luchan para ser el rey de Tokyo.",
+    "code": "G012",
+    "price": 24.99,
+    "status": true,
+    "stock": 90,
+    "category": "Familiar",
+    "thumbnails": [
+      "ruta/imagen12.jpg"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Mysterium",
+    "description": "Un juego cooperativo de deducción donde los jugadores tratan de resolver un asesinato.",
+    "code": "G013",
+    "price": 39.99,
+    "status": true,
+    "stock": 55,
+    "category": "Cooperativo",
+    "thumbnails": [
+      "ruta/imagen13.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "The Crew",
+    "description": "Un juego cooperativo de cartas donde los jugadores deben completar misiones en el espacio.",
+    "code": "G014",
+    "price": 22.99,
+    "status": true,
+    "stock": 130,
+    "category": "Cooperativo",
+    "thumbnails": [
+      "ruta/imagen14.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Twilight Struggle",
+    "description": "Un juego de dos jugadores sobre la Guerra Fría entre Estados Unidos y la Unión Soviética.",
+    "code": "G015",
+    "price": 59.99,
+    "status": true,
+    "stock": 60,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen15.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Patchwork",
+    "description": "Un juego de estrategia para dos jugadores sobre la creación de una colcha.",
+    "code": "G016",
+    "price": 34.99,
+    "status": true,
+    "stock": 65,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen16.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Splendor",
+    "description": "Un juego de cartas donde los jugadores coleccionan gemas para obtener puntos.",
+    "code": "G017",
+    "price": 30.99,
+    "status": true,
+    "stock": 150,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen17.jpg"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Tigris & Euphrates",
+    "description": "Un juego de civilización en el que los jugadores construyen imperios en Mesopotamia.",
+    "code": "G018",
+    "price": 44.99,
+    "status": true,
+    "stock": 40,
+    "category": "Estrategia",
+    "thumbnails": [
+      "ruta/imagen18.jpg"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Clue",
+    "description": "Un juego de misterio donde los jugadores deben adivinar quién cometió el crimen.",
+    "code": "G019",
+    "price": 19.99,
+    "status": true,
+    "stock": 200,
+    "category": "Familiar",
+    "thumbnails": [
+      "ruta/imagen19.jpg"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Uno",
+    "description": "El juego clásico de cartas donde el objetivo es deshacerse de todas las cartas.",
+    "code": "G020",
+    "price": 12.99,
+    "status": true,
+    "stock": 300,
+    "category": "Familiar",
+    "thumbnails": [
+      "ruta/imagen20.jpg"
+    ]
+  },
+  {
+    "title": "Producto de prueba modificado 2",
+    "description": "Descripción del producto de prueba",
+    "code": "ABC123",
+    "price": 199.99,
+    "status": true,
+    "stock": 0,
+    "category": "Electrónica",
+    "thumbnails": [
+      "https://example.com/image1.jpg",
+      "https://example.com/image2.jpg"
+    ],
+    "id": 23
+  }
+]
