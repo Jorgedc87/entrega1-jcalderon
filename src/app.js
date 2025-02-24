@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const productsRouter=require('./routes/products.router.js');
 const cartRouter=require('./routes/cart.router.js');
-const authMiddleware = require('./middleware/auth.middleware.js');
+const authMiddleware = require('./middlewares/auth.middleware.js');
 const PORT=8080;
 
 app.use(express.json());
