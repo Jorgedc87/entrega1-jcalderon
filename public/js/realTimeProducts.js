@@ -87,7 +87,6 @@ function validateProduct(producto) {
 
 /* Eliminar Producto */
 function eliminarProducto(id) {
-    console.log(id);
     socket.emit("eliminarProducto", id);
 }
 

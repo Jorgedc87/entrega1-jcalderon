@@ -13,15 +13,12 @@ const setupSocket = (io) => {
     // Agregar un nuevo producto
     socket.on('nuevoProducto', async (product) => {
       await productManager.create(product);
-      console.log("Hola");
       const updatedProducts = await productManager.findAll();
-      console.log("Chau", updatedProducts);
       io.emit('actualizarProductos', updatedProducts); 
     });
     
     // Borrar un producto
     socket.on('eliminarProducto', async (id) => {
-      console.log('Producto a eliminar:', id);
       await productManager.delete(id); 
       
       const updatedProducts = await productManager.findAll();
