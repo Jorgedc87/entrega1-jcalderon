@@ -1,7 +1,8 @@
-const Router=require('express').Router;
-const ProductManager = require('../dao/ProductManager.js');
+import { Router } from 'express';
+import ProductManager from '../dao/ProductManager.js';
 
 const router=Router()
+const productManager = new ProductManager();
 
 router.get('/', async (req, res) => {
     try {
@@ -57,4 +58,4 @@ router.delete('/:pid', async (req, res) => {
     }
 });
 
-module.exports=router
+export default router;

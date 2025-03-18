@@ -1,9 +1,9 @@
-const fs=require("fs")
+import fs from 'fs';
 
-class ProductManager{
+export default class ProductManager{
   static path = "./src/data/products.json"
 
-  static async findAll() {
+  async findAll() {
     try {
         await fs.promises.access(ProductManager.path, fs.constants.F_OK);
         const data = await fs.promises.readFile(ProductManager.path, "utf-8");
@@ -18,7 +18,7 @@ class ProductManager{
   }
 
   
-  static async findById(id) {
+  async findById(id) {
     try {
         await fs.promises.access(ProductManager.path, fs.constants.F_OK);
         const data = await fs.promises.readFile(ProductManager.path, "utf-8");
@@ -32,20 +32,20 @@ class ProductManager{
     }
   }
 
-  static async create(product) {
+  async create(product) {
     try {
-      const validation = ProductManager.validateProduct(product);
-
+      const validation = this.validateProduct(product); // Usamos 'this' para acceder al método de instancia
+  
       if (!validation.isValid) {
         return { success: false, error: validation.errors };
       }
-
-      const products = await ProductManager.findAll();
+  
+      const products = await this.findAll();
       let savedProduct;
       const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
       savedProduct = { ...product, id: newId };
       products.push(savedProduct);
-
+  
       await fs.promises.writeFile(ProductManager.path, JSON.stringify(products, null, 2), "utf-8");
       return { success: true, product: savedProduct };
     } catch (error) {
@@ -53,39 +53,41 @@ class ProductManager{
       return { success: false, error: "Error al guardar el producto." };
     }
   }
-
-  static async update(id, product) {
+  
+  async update(id, product) {
     try {
-        const { id: productId, ...productWithoutId } = product;
-        const validation = ProductManager.validateProduct(productWithoutId);
-
-        if (!validation.isValid) {
-            return { success: false, error: validation.errors };
-        }
-
-        const products = await ProductManager.findAll();
-        const productIndex = products.findIndex(p => p.id == id);
-
-        if (productIndex === -1) {
-            return { success: false, error: "Producto no encontrado." };
-        }
-
-        const updatedProduct = { ...products[productIndex], ...productWithoutId };
-        products[productIndex] = updatedProduct;
-
-        await fs.promises.writeFile(ProductManager.path, JSON.stringify(products, null, 2), "utf-8");
-
-        return { success: true, product: updatedProduct };
-
+      const { id: productId, ...productWithoutId } = product;
+      const validation = this.validateProduct(productWithoutId); // Usamos 'this' para acceder al método de instancia
+  
+      if (!validation.isValid) {
+        return { success: false, error: validation.errors };
+      }
+  
+      const products = await this.findAll();
+      const productIndex = products.findIndex(p => p.id == id);
+  
+      if (productIndex === -1) {
+        return { success: false, error: "Producto no encontrado." };
+      }
+  
+      const updatedProduct = { ...products[productIndex], ...productWithoutId };
+      products[productIndex] = updatedProduct;
+  
+      await fs.promises.writeFile(ProductManager.path, JSON.stringify(products, null, 2), "utf-8");
+  
+      return { success: true, product: updatedProduct };
+  
     } catch (error) {
-        console.error("Error al actualizar el producto:", error);
-        return { success: false, error: "Error al actualizar el producto." };
+      console.error("Error al actualizar el producto:", error);
+      return { success: false, error: "Error al actualizar el producto." };
     }
   }
+  
 
-  static async delete(id) {
+  async delete(id) {
     try {
-        const products = await ProductManager.findAll();
+        const products = await this.findAll();
+        
         const productIndex = products.findIndex(p => p.id == id);
 
         if (productIndex === -1) {
@@ -93,6 +95,7 @@ class ProductManager{
         }
 
         products.splice(productIndex, 1);
+
         await fs.promises.writeFile(ProductManager.path, JSON.stringify(products, null, 2), "utf-8");
 
         return { success: true };
@@ -100,9 +103,9 @@ class ProductManager{
         console.error("Error al eliminar el producto:", error);
         return { success: false, error: "Error al eliminar el producto." };
     }
-  }
+    }
 
-  static validateProduct(product) {
+  validateProduct(product) {
     let errors = "";
     let isValid = true;
 
@@ -153,5 +156,3 @@ class ProductManager{
   }
 
 }
-
-module.exports=ProductManager

@@ -1,7 +1,7 @@
-const fs = require("fs");
-const ProductManager = require("./ProductManager");
+import fs from 'fs/promises';
+import ProductManager from './ProductManager.js';
 
-class CartManager {
+export default class CartManager {
   static path = "./src/data/carts.json";
 
   static async create() {
@@ -108,5 +108,3 @@ class CartManager {
     }
   }
 }
-
-module.exports = CartManager;

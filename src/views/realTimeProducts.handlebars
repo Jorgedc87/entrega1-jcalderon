@@ -1,0 +1,84 @@
+<!-- Contenedor Principal -->
+<div class="container mx-auto p-8">
+    <div class="flex justify-between space-x-8">
+      
+      <!-- Lista de Productos -->
+      <div class="w-1/2 bg-gray-800 p-6 rounded-lg shadow-lg space-y-6">
+        <h2 class="text-3xl font-semibold text-center text-gray-100">Lista de Productos</h2>
+
+        <div class="space-y-4" id="productList">
+          {{#each products}}
+            <div class="flex justify-between items-center bg-gray-700 p-4 rounded-lg">
+              <div class="flex items-center space-x-4">
+                <img src="{{this.thumbnails}}" alt="{{this.title}}" class="w-20 h-20 object-cover rounded-md">
+                <div class="text-white">
+                  <p class="font-semibold text-lg">{{this.title}}</p>
+                  <p class="text-sm text-gray-400">${{this.price}}</p>
+                </div>
+              </div>
+              <button id="delete-button" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md" data-id="{{this.id}}">Eliminar</button>
+            </div>
+          {{else}}
+            <p class="text-center text-gray-400">No hay productos disponibles.</p>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Formulario para Agregar Producto -->
+      <div class="w-1/3 bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-semibold text-center text-gray-100">Agregar Producto</h2>
+        
+        <form id="productForm" class="space-y-4">
+        <!-- Título -->
+        <div class="flex flex-col">
+            <label for="title" class="text-gray-300 font-medium">Título</label>
+            <input type="text" id="title" name="title" class="bg-gray-700 text-white p-3 rounded-lg" required>
+        </div>
+
+        <!-- Descripción -->
+        <div class="flex flex-col">
+            <label for="description" class="text-gray-300 font-medium">Descripción</label>
+            <textarea id="description" name="description" class="bg-gray-700 text-white p-3 rounded-lg" required></textarea>
+        </div>
+
+        <!-- Código -->
+        <div class="flex flex-col">
+            <label for="code" class="text-gray-300 font-medium">Código</label>
+            <input type="text" id="code" name="code" class="bg-gray-700 text-white p-3 rounded-lg" required>
+        </div>
+
+        <!-- Precio -->
+        <div class="flex flex-col">
+            <label for="price" class="text-gray-300 font-medium">Precio</label>
+            <input type="number" id="price" name="price" step="0.01" class="bg-gray-700 text-white p-3 rounded-lg" required>
+        </div>
+
+        <!-- Estado -->
+        <div class="flex items-center space-x-2">
+        <label for="status" class="text-gray-300 font-medium">Estado</label>
+        <input type="checkbox" id="status" name="status" class="bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-green-600">
+        </div>
+
+        <!-- Stock -->
+        <div class="flex flex-col">
+            <label for="stock" class="text-gray-300 font-medium">Stock</label>
+            <input type="number" id="stock" name="stock" class="bg-gray-700 text-white p-3 rounded-lg" required>
+        </div>
+
+        <!-- Categoría -->
+        <div class="flex flex-col">
+            <label for="category" class="text-gray-300 font-medium">Categoría</label>
+            <input type="text" id="category" name="category" class="bg-gray-700 text-white p-3 rounded-lg" required>
+        </div>
+
+        <!-- Imágenes -->
+        <div class="flex flex-col">
+            <label for="thumbnails" class="text-gray-300 font-medium">Imagenes (URLs)</label>
+            <input type="text" id="thumbnails" name="thumbnails" class="bg-gray-700 text-white p-3 rounded-lg" required>
+        </div>
+
+        <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-lg w-full mt-4 hover:bg-green-700 focus:outline-none">Agregar Producto</button>
+        </form>
+      </div>
+    </div>
+</div>
