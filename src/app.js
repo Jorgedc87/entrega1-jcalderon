@@ -1,5 +1,7 @@
 // app.js
 import express from 'express';
+import mongoose from 'mongoose';
+import {config} from './config/config.js';
 import productsRouter from './routes/products.router.js';
 import cartRouter from './routes/cart.router.js';
 import viewsRouter from './routes/views.router.js';
@@ -12,7 +14,7 @@ const productManager = new ProductManager('./src/data/products.json');
 
 // Enviroments
 const app = express();
-const PORT = 8080;
+const PORT = config.PORT || 8080;
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -46,4 +48,17 @@ const httpServer = app.listen(PORT, () => console.log(`Servidor escuchando en ht
 const io = new Server(httpServer);
 
 setupSocket(io); 
+
+try {
+  await mongoose.connect(
+    config.MONGO_URL,
+    {
+      dbName: config.DB_NAME
+    }
+  )
+
+  console.log('Conectado a la base de datos MongoDB');
+} catch (error) {
+  console.error('Error al conectar a la base de datos:', error);
+}
 

@@ -1,5 +1,18 @@
 [
   {
+    "id": 1,
+    "title": "Catan",
+    "description": "Un juego de estrategia donde los jugadores construyen y comercian en la isla de Catan.",
+    "code": "G001",
+    "price": 39.99,
+    "status": true,
+    "stock": 100,
+    "category": "Estrategia",
+    "thumbnails": [
+      "https://acdn-us.mitiendanube.com/stores/973/406/products/banner_catan_box1-7864d9787421e3191e16249794028273-480-0.png"
+    ]
+  },
+  {
     "id": 2,
     "title": "Monopoly",
     "description": "El clásico juego de mesa de bienes raíces.",
@@ -89,5 +102,18 @@
     "thumbnails": [
       "https://cdnx.jumpseller.com/relier/image/60542454/Azul1.png?1740493426"
     ]
+  },
+  {
+    "title": "Monopoly",
+    "description": "El clásico juego de mesa de bienes raíces.",
+    "code": "G002",
+    "price": 29.99,
+    "status": true,
+    "stock": 200,
+    "category": "Familiar",
+    "thumbnails": [
+      "https://lh3.googleusercontent.com/proxy/3aZX3-AVu8zGDnh9okTz9bUtGUNAtT3lkHNzjDEM0iHDG34a9YTPNLh4WDt2agdMXrieFnMA8RsjfNDcUJPWb_2JvCZ86DjOs9flYLGS3YeQxvaAKKDVT34"
+    ],
+    "id": 10
   }
 ]

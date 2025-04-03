@@ -1,6 +1,6 @@
-import ProductManager from './dao/ProductManager.js';
+import ProductManagerMongo from './dao/ProductManagerMongo.js';
 
-const productManager = new ProductManager('./src/data/products.json');
+const productManager = new ProductManagerMongo();
 
 const setupSocket = (io) => {
   io.on('connection', async (socket) => {
@@ -19,6 +19,7 @@ const setupSocket = (io) => {
     
     // Borrar un producto
     socket.on('eliminarProducto', async (id) => {
+      console.log('Eliminando producto con ID:', id);
       await productManager.delete(id); 
       
       const updatedProducts = await productManager.findAll();

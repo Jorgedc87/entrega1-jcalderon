@@ -1,21 +1,25 @@
 import fs from 'fs';
 
 export default class ProductManager{
-  static path = "./src/data/products.json"
+  static path = "./src/data/products.json";
 
   async findAll() {
     try {
-        await fs.promises.access(ProductManager.path, fs.constants.F_OK);
-        const data = await fs.promises.readFile(ProductManager.path, "utf-8");
-        return JSON.parse(data);
+      console.log("Leyendo el archivo de productos...");
+      await fs.promises.access(ProductManager.path, fs.constants.F_OK);
+      const data = await fs.promises.readFile(ProductManager.path, "utf-8");
+      console.log("Archivo leído correctamente.");
+      return JSON.parse(data);
     } catch (error) {
-        if (error.code === "ENOENT") {
-            return [];
-        }
-        console.error("Error al leer el archivo:", error);
+      if (error.code === "ENOENT") {
+        console.warn("Archivo de productos no encontrado.");
         return [];
+      }
+      console.error("Error al leer el archivo:", error);
+      return [];
     }
   }
+  
 
   
   async findById(id) {
