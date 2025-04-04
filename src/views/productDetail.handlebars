@@ -25,7 +25,7 @@
           </p>
           <p class="text-sm italic text-gray-400">Promoción válida hasta fin de mes</p>
 
-          <form action="/api/carts/{{cartId}}/products/{{_id}}" method="POST">
+          <form action="/api/carts/{{cartId}}/product/{{_id}}" method="POST" onsubmit="setTimeout(() => location.reload(), 100)">
             <button
               type="submit"
               class="mt-4 w-full bg-green-500 hover:bg-green-400 text-white py-3 rounded-lg font-semibold transition"
@@ -40,10 +40,20 @@
     <!-- 🛒 Carrito Sidebar -->
     <aside class="bg-neutral-800 rounded-2xl p-6 h-fit shadow-xl" data-cart-id="{{cartId}}">
       <h2 class="text-2xl font-bold text-green-400 mb-4">🛒 Tu Carrito</h2>
-      <p class="text-xs text-gray-500 mb-2">Cart ID: {{cartId}}</p>
+      <p class="text-xs text-gray-500 mb-4">Cart ID: {{cartId}}</p>
 
-      <ul id="cart-list" class="text-sm text-white space-y-2 mb-2"></ul>
-      <p id="cart-empty-msg" class="text-gray-400 text-sm">Aún no has agregado productos.</p>
+      <ul id="cart-list" class="text-sm text-white space-y-3 mb-6"></ul>
+      <p id="cart-empty-msg" class="text-gray-400 text-sm mb-6">Aún no has agregado productos.</p>
+
+      <div id="cart-summary" class="hidden text-sm text-white border-t border-gray-600 pt-4">
+        <div class="flex justify-between mb-4 font-semibold">
+          <span>Total:</span>
+          <span id="cart-total" class="text-green-400">$0.00</span>
+        </div>
+        <a href="/carts/{{cartId}}" class="block bg-orange-500 hover:bg-orange-400 text-center text-white py-2 px-4 rounded transition">
+          Ver carrito
+        </a>
+      </div>
     </aside>
 
   </div>

@@ -93,6 +93,7 @@ router.get("/products", async (req, res) => {
 router.get("/products/:pid", async (req, res) => {
   try {
     const product = await productManager.findById(req.params.pid);
+    const cart = await cartManager.getCartById("67ef20f47f460edbb1182ebe");
 
     if (!product) {
       return res.status(404).send("Producto no encontrado");
@@ -100,7 +101,8 @@ router.get("/products/:pid", async (req, res) => {
 
     res.render("productDetail", {
       ...product,
-      cartId: "67ef20f47f460edbb1182ebe" 
+      cartId: cart._id,
+      cartProducts: cart.products
     });
   } catch (error) {
     console.error("Error al mostrar detalle de producto:", error);

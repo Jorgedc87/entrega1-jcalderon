@@ -1,101 +1,117 @@
+
 # API de Carrito de Compras - Coderhouse
-Este proyecto simula una API para gestionar productos y carritos de compras. Implementa rutas
-para obtener productos, agregar productos a un carrito y consultar el contenido de un carrito.
-Además, se ha integrado un middleware de autorización simulado utilizando un JWT hardcodeado
-para proteger todas las rutas de la API.
+
+Este proyecto simula una API para gestionar productos y carritos de compras. Implementa rutas para obtener productos, agregar productos a un carrito y consultar el contenido de un carrito. 
 
 ## Requisitos
+
 - Node.js >= 16.x
 - npm >= 8.x
+- MongoDB
 
 ## Instalación y Configuración
+
 1. Clona este repositorio en tu máquina local:
-```bash
-git clone https://github.com/Jorgedc87/entrega1-jcalderon.git
-```
+
+   ```bash
+   git clone https://github.com/Jorgedc87/entrega1-jcalderon.git
+   ```
 
 2. Navega a la carpeta del proyecto:
-```bash
-cd entrega1-jcalderon
-```
+
+   ```bash
+   cd entrega1-jcalderon
+   ```
 
 3. Instala las dependencias:
-```bash
-npm install
-```
 
-4. Crea una copia del archivo `.env.example` borrando el `.example` en la raíz del proyecto y agrega la siguiente variable:
-```bash
-JWT_SECRET=tu_clave_secreta_aqui
-```
+   ```bash
+   npm install
+   ```
 
 ## Estructura del Proyecto
-- **`/src`**: Contiene el código fuente de la API.
-- **`/dao`**: Directorio que maneja las operaciones de la base de datos simulada (en este caso,
-archivos JSON).
-- **`/routes`**: Directorio que contiene las rutas para manejar las peticiones HTTP.
-- **`/data`**: Directorio que simula la base de datos con los archivos `carts.json` y `products.json`.
-- **`/middlewares`**: Directorio que contiene el middleware de autenticación simulado.
 
-## Endpoints
+- `/src`: Contiene el código fuente de la API.
+  - `/dao`: Directorio que maneja las operaciones de acceso a datos, incluyendo la integración con MongoDB.
+  - `/routes`: Define las rutas para productos y carritos.
+  - `/controllers`: Contiene la lógica de negocio para manejar las solicitudes.
+  - `/models`: Define los esquemas de datos para productos y carritos.
+- `/public`: Archivos estáticos y recursos públicos.
+- `server.js`: Punto de entrada principal de la aplicación.
 
-### **IMPORTANTE**: EL BEARER TOKEN QUE SE ENVIA EN AUTHORIZATION DEBE SER EL MISMO QUE EL QUE SE AGREGA EN EL ARCHIVO .ENV. **MIRAR CONTENIDO DE INSTALACIÓN Y CONFIGURACIÓN**
+## Funcionalidades Principales
 
-### Productos
-- **GET `/api/products`**: Obtiene todos los productos disponibles.
-- **GET `/api/products/:pid`**: Obtiene un producto específico por su ID.
-- **POST `/api/products`**: Crea un nuevo producto.
-- **PUT `/api/products/:pid`**: Actualiza un producto existente.
-- **DELETE `/api/products/:pid`**: Elimina un producto.
+### Gestión de Productos
 
-### Carritos
-- **POST `/api/carts`**: Crea un nuevo carrito.
-- **GET `/api/carts/:cid/products`**: Obtiene todos los productos en un carrito específico.
-- **POST `/api/carts/:cid/products/:pid`**: Agrega un producto al carrito (simula la existencia del
-producto).
+- **Obtener productos con filtros y paginación**: La ruta `GET /api/products` permite obtener una lista de productos con las siguientes opciones de query:
 
-## Simulación de Autenticación
-Se ha implementado un middleware que simula la autenticación con JWT. Este middleware protege
-todas las rutas de la API, permitiendo el acceso solo a aquellos usuarios que envíen el JWT
-correcto.
+  - `limit` (opcional): Número de productos a devolver por página. Por defecto, es 10.
+  - `page` (opcional): Página específica a obtener. Por defecto, es 1.
+  - `sort` (opcional): Ordenamiento por precio, puede ser 'asc' o 'desc'.
+  - `query` (opcional): Filtro para buscar productos por categoría o disponibilidad.
 
-- **JWT Hardcodeado**: El token JWT es verificado en cada solicitud y está hardcodeado en el
-código. Si el token proporcionado no coincide con el valor esperado, se devuelve un error de "No
-autorizado".
-Para simular la autenticación, se debe enviar el token en el encabezado de la solicitud con la
-siguiente estructura:
-```bash
-Authorization: Bearer <jwt_token>
-```
+  La respuesta incluye información sobre la paginación:
 
-### Middleware de Autorización
-- El middleware se activa para todas las rutas, verificando el token en el encabezado de la solicitud.
-- Si el token es válido, la solicitud continúa normalmente.
-- Si el token es incorrecto o no está presente, la solicitud será rechazada con un error 401 (No
-autorizado).
+  ```json
+  {
+    "status": "success",
+    "payload": [/* productos */],
+    "totalPages": 5,
+    "prevPage": 1,
+    "nextPage": 3,
+    "page": 2,
+    "hasPrevPage": true,
+    "hasNextPage": true,
+    "prevLink": "/api/products?page=1",
+    "nextLink": "/api/products?page=3"
+  }
+  ```
 
-## Archivos importantes
-- **`/src/routes/products.router.js`**: Rutas relacionadas con productos.
-- **`/src/routes/cart.router.js`**: Rutas relacionadas con carritos.
-- **`/src/middlewares/protected-route.js`**: Middleware de protección para verificar el JWT.
-- **`/src/dao/CartManager.js`**: Lógica para gestionar los carritos de compras.
-- **`/src/dao/ProductManager.js`**: Lógica para gestionar los productos.
+### Gestión de Carritos
 
-## .gitignore
-Se ha configurado un archivo `.gitignore` para evitar el seguimiento de archivos sensibles y
-generados automáticamente:
+- **Eliminar un producto del carrito**: `DELETE /api/carts/:cid/products/:pid` elimina el producto seleccionado del carrito especificado.
 
-```bash
-# NODE
-node_modules/
-# Variables de entorno
-.env
-# Archivos de IDE
-.vscode/
-# Carpeta de Build
-dist/
-build/
-```
+- **Actualizar todos los productos del carrito**: `PUT /api/carts/:cid` reemplaza el contenido del carrito con un nuevo arreglo de productos.
+
+- **Actualizar la cantidad de un producto en el carrito**: `PUT /api/carts/:cid/products/:pid` actualiza la cantidad de ejemplares.
+
+## Vistas y Navegación
+
+### Vista de Productos
+
+- Ruta: `/products`
+- Muestra todos los productos con paginación.
+- Cada producto puede:
+  - Llevar a una vista detallada: `/products/:pid` (con título, descripción, categoría, precio y botón para agregar al carrito).
+  - Tener un botón directo para agregar al carrito sin entrar a otra vista.
+
+### Vista de Carrito
+
+- Ruta: `/carts/:cid`
+- Muestra todos los productos del carrito específico con sus detalles completos gracias a `populate`.
+
+## Tecnologías Utilizadas
+
+- Node.js
+- Express
+- MongoDB con Mongoose
+- Handlebars
+- Websockets (socket.io)
+- JSON Web Tokens (JWT)
+- TailwindCSS (en views)
+
+## Autor
+
+Proyecto desarrollado por **Jorge Calderón** como parte del curso de Backend de **Coderhouse**.
+
+- GitHub: [@Jorgedc87](https://github.com/Jorgedc87)
+- Email: jorgedc87@gmail.com *(o el que desees colocar)*
+- Portfolio (opcional): [Tu sitio si tenés]
 
 ## Licencia
-Este proyecto está licenciado bajo la Licencia MIT.
+
+Este proyecto está bajo la licencia MIT. Podés utilizarlo, modificarlo y distribuirlo libremente, siempre y cuando se incluya una copia del aviso de licencia original.
+
+---
+
+**¡Gracias por visitar el repositorio! Si te resultó útil, no dudes en darle una estrella ⭐ en GitHub.**
