@@ -68,4 +68,30 @@ router.delete('/:cid', async (req, res) => {
   }
 });
 
+router.post('/:cid/purchase', async (req, res) => {
+  try {
+    const purchaserEmail = req.body.email;
+    if (!purchaserEmail) return res.status(400).json({ error: "Falta el email del comprador" });
+
+    const result = await cartManager.purchaseCart(req.params.cid, purchaserEmail);
+    if (!result.ticket) {
+      return res.status(400).json({
+        status: "error",
+        message: "No se pudo procesar ningún producto. Verificá el stock. Recuerda que debes enviar el email en el body de la petición."
+      });
+    }
+
+    res.json({
+      status: "success",
+      message: result.notProcessed.length
+        ? "Compra parcial realizada"
+        : "Compra completa realizada",
+      ticket: result.ticket,
+      productosNoProcesados: result.notProcessed
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 export default router;

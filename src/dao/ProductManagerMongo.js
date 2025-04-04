@@ -67,8 +67,8 @@ export default class ProductManager{
         isValid = false;
     }
 
-    if (typeof product.code !== 'string' || product.code.trim() === '') {
-        errors += "El código es obligatorio y debe ser una cadena no vacía. ";
+    if (typeof product.code !== 'number' || product.price <= 0) {
+        errors += "El código es obligatorio y debe ser una numero positivo. ";
         isValid = false;
     }
 
