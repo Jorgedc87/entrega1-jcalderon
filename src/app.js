@@ -1,11 +1,10 @@
-// app.js
 import express from 'express';
 import mongoose from 'mongoose';
 import {config} from './config/config.js';
 import productsRouter from './routes/products.router.js';
 import cartRouter from './routes/cart.router.js';
 import viewsRouter from './routes/views.router.js';
-import { engine } from 'express-handlebars';
+import handlebars from 'express-handlebars';
 import { Server } from 'socket.io';
 import setupSocket from './socket.js';
 
@@ -15,12 +14,19 @@ const productManager = new ProductManager('./src/data/products.json');
 // Enviroments
 const app = express();
 const PORT = config.PORT || 8080;
+const hbs = handlebars.create({
+  helpers: {
+    calcSubtotal: (price, quantity) => (price * quantity).toFixed(2),
+    calcTotal: (products) =>
+      products.reduce((acc, p) => acc + p.product.price * p.quantity, 0).toFixed(2),
+  }
+});
 
 app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
-app.engine('handlebars', engine());
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './src/views');
 

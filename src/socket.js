@@ -25,7 +25,12 @@ const setupSocket = (io) => {
       const updatedProducts = await productManager.findAll();
       
       io.emit('actualizarProductos', updatedProducts);  
-  });
+    });
+
+    socket.on('cart-updated', (updatedCart) => {
+      console.log('Carrito actualizado:', updatedCart);
+      io.emit('cart-updated', updatedCart); 
+    });
 
     // Desconexión
     socket.on('disconnect', () => {

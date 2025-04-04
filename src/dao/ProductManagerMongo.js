@@ -1,11 +1,31 @@
 import { productModel } from "./models/product.model.js";
 
 export default class ProductManager{
-  async findAll() {
-    return await productModel.find().lean();
-  }
+  async findAll(limit = 10,page = 1, sort, query) {
+    limit = parseInt(limit) || 10;
+    page = parseInt(page) || 1;
   
+    const filter = {};
+    if (query) {
+      if (query === 'disponible') {
+        filter.stock = { $gt: 0 };
+      } else {
+        filter.category = query; 
+      }
+    }
 
+    const options = {
+      limit,
+      page,
+      lean: true
+    };
+  
+    if (sort === 'asc' || sort === 'desc') {
+      options.sort = { price: sort === 'asc' ? 1 : -1 };
+    }
+
+    return await productModel.paginate(filter, options);
+  }
   
   async findById(id) {
     return await productModel.findById(id).lean();

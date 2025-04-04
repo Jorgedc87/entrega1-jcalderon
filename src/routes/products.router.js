@@ -8,7 +8,8 @@ const productManager = new ProductManagerMongo();
 router.get("/", async (req, res) => {
     try {
       console.log("Obteniendo todos los productos...");
-      const products = await productManager.findAll();
+      const { limit, page, sort, query } = req.query;
+      const products = await productManager.findAll(limit, page, sort, query);
       res.json(products);
     } catch (error) {
       console.error("Error al obtener los productos:", error);

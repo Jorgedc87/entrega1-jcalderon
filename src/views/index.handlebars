@@ -1,0 +1,110 @@
+<div class="min-h-screen bg-neutral-900 text-white px-6 py-10">
+  <h1 class="text-4xl font-bold text-orange-500 mb-10 text-center">Nuestros Productos</h1>
+
+  <form method="GET" action="/" class="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+    <input
+      type="text"
+      name="query"
+      placeholder="Buscar por categoría (Ej: Estrategia, Familiar...)"
+      value="{{query}}"
+      class="px-4 py-2 rounded-lg w-full sm:w-1/2 text-white border-white border-2 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+    />
+
+    {{#if limit}}
+      <input type="hidden" name="limit" value="{{limit}}">
+    {{/if}}
+
+    {{#if sort}}
+      <input type="hidden" name="sort" value="{{sort}}">
+    {{/if}}
+
+    <button
+      type="submit"
+      class="bg-orange-500 hover:bg-orange-400 text-white px-6 py-2 rounded"
+    >
+      Buscar
+    </button>
+
+    <a
+      href="/?query=disponible{{#if limit}}&limit={{limit}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+      class="bg-green-500 hover:bg-green-400 text-white px-6 py-2 rounded text-center"
+    >
+      Disponibles
+    </a>
+  </form>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- 🟩 Productos -->
+    <div class="lg:col-span-2 space-y-6">
+      <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {{#each payload}}
+          <div class="bg-white text-black rounded-xl overflow-hidden shadow hover:shadow-lg transition flex flex-col">
+            <!-- Imagen -->
+            {{#if thumbnails.length}}
+              <img src="{{thumbnails.[0]}}" alt="{{title}}" class="w-full h-52 object-contain bg-gray-100">
+            {{/if}}
+
+            <div class="p-4 flex flex-col flex-grow">
+              <h2 class="text-lg font-bold text-gray-800 mb-1 truncate">{{title}}</h2>
+              <p class="text-green-600 text-xl font-semibold mb-1">$ {{price}}</p>
+              <p class="text-sm text-gray-600 mb-2 truncate">{{description}}</p>
+              <p class="text-xs text-gray-500 mb-4">Categoría: {{category}}</p>
+
+              <!-- Botones -->
+              <div class="mt-auto flex flex-col gap-2">
+                <a href="/products/{{_id}}" class="block text-center bg-orange-500 text-white py-2 rounded hover:bg-orange-400 transition">Ver detalle</a>
+                <button
+                  class="add-to-cart w-full bg-green-500 text-white py-2 rounded hover:bg-green-400 transition cursor-pointer"
+                  data-product-id="{{_id}}"
+                  data-cart-id="{{../cartId}}"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <!-- Paginación -->
+      <div class="flex justify-center items-center gap-6 mt-10">
+        {{#if hasPrevPage}}
+          <a href="{{prevLink}}">
+            ⬅ Anterior
+          </a>
+        {{/if}}
+
+        <span class="text-gray-300">Página {{page}} de {{totalPages}}</span>
+
+        {{#if hasNextPage}}
+          <a href="{{nextLink}}">
+            Siguiente ➡
+          </a>
+        {{/if}}
+      </div>
+
+    </div>
+
+    <aside class="bg-neutral-800 rounded-2xl p-6 h-fit shadow-xl" data-cart-id="{{cartId}}">
+      <h2 class="text-2xl font-bold text-green-400 mb-4">🛒 Tu Carrito</h2>
+      <p class="text-xs text-gray-500 mb-4">Cart ID: {{cartId}}</p>
+
+      <ul id="cart-list" class="text-sm text-white space-y-3 mb-6"></ul>
+
+      <p id="cart-empty-msg" class="text-gray-400 text-sm mb-6">Aún no has agregado productos.</p>
+
+      <div id="cart-summary" class="hidden text-sm text-white border-t border-gray-600 pt-4">
+        <div class="flex justify-between mb-4 font-semibold">
+          <span>Total:</span>
+          <span id="cart-total" class="text-green-400">$0.00</span>
+        </div>
+        <a href="/carts/{{cartId}}" class="block bg-orange-500 hover:bg-orange-400 text-center text-white py-2 px-4 rounded transition">
+          Ver carrito
+        </a>
+      </div>
+    </aside>
+
+
+  </div>
+</div>

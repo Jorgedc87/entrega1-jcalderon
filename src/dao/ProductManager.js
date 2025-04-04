@@ -38,7 +38,7 @@ export default class ProductManager{
 
   async create(product) {
     try {
-      const validation = this.validateProduct(product); // Usamos 'this' para acceder al método de instancia
+      const validation = this.validateProduct(product);
   
       if (!validation.isValid) {
         return { success: false, error: validation.errors };
@@ -61,7 +61,7 @@ export default class ProductManager{
   async update(id, product) {
     try {
       const { id: productId, ...productWithoutId } = product;
-      const validation = this.validateProduct(productWithoutId); // Usamos 'this' para acceder al método de instancia
+      const validation = this.validateProduct(productWithoutId);
   
       if (!validation.isValid) {
         return { success: false, error: validation.errors };
@@ -123,9 +123,9 @@ export default class ProductManager{
         isValid = false;
     }
 
-    if (typeof product.code !== 'string' || product.code.trim() === '') {
-        errors += "El código es obligatorio y debe ser una cadena no vacía. ";
-        isValid = false;
+    if (typeof product.code !== 'number' || product.code <= 0) {
+      errors += "El código debe ser un número positivo. ";
+      isValid = false;
     }
 
     if (typeof product.price !== 'number' || product.price <= 0) {

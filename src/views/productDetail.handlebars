@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-neutral-900 text-white px-6 py-10">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- 🟩 Imagen + Detalles + Agregar al carrito -->
+    <div class="lg:col-span-2 flex flex-col lg:flex-row gap-6">
+
+      <!-- Imagen -->
+      <div class="flex-shrink-0 bg-white rounded-xl p-4">
+        <img src="{{thumbnails.[0]}}" alt="{{title}}" class="w-72 h-auto object-contain mx-auto" />
+      </div>
+
+      <!-- Info y acciones -->
+      <div class="flex flex-col justify-between bg-neutral-800 rounded-xl p-6 w-full">
+        <div>
+          <h1 class="text-3xl font-bold text-orange-500 mb-2">{{title}}</h1>
+          <p class="text-gray-300 mb-4">{{description}}</p>
+          <p class="text-sm text-gray-400 mb-1">Categoría: <span class="text-white">{{category}}</span></p>
+          <p class="text-green-400 text-2xl font-bold mb-1">$ {{price}}</p>
+          <p class="text-sm text-white mb-6">Stock disponible: {{stock}}</p>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-green-500 flex items-center gap-2">
+            🚚 Envío gratis en compras mayores a $100
+          </p>
+          <p class="text-sm italic text-gray-400">Promoción válida hasta fin de mes</p>
+
+          <form action="/api/carts/{{cartId}}/products/{{_id}}" method="POST">
+            <button
+              type="submit"
+              class="mt-4 w-full bg-green-500 hover:bg-green-400 text-white py-3 rounded-lg font-semibold transition"
+            >
+              Agregar al carrito
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🛒 Carrito Sidebar -->
+    <aside class="bg-neutral-800 rounded-2xl p-6 h-fit shadow-xl" data-cart-id="{{cartId}}">
+      <h2 class="text-2xl font-bold text-green-400 mb-4">🛒 Tu Carrito</h2>
+      <p class="text-xs text-gray-500 mb-2">Cart ID: {{cartId}}</p>
+
+      <ul id="cart-list" class="text-sm text-white space-y-2 mb-2"></ul>
+      <p id="cart-empty-msg" class="text-gray-400 text-sm">Aún no has agregado productos.</p>
+    </aside>
+
+  </div>
+</div>

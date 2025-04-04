@@ -1,0 +1,56 @@
+<div class="min-h-screen bg-neutral-900 text-white px-6 py-10">
+  <h1 class="text-4xl font-bold text-orange-500 mb-10 text-center">🛒 Detalle del Carrito</h1>
+
+  {{#if products.length}}
+    <div class="grid lg:grid-cols-3 gap-8">
+      <!-- 🧾 Lista de productos -->
+      <div class="lg:col-span-2 space-y-6">
+        {{#each products}}
+          <div class="bg-neutral-800 rounded-xl p-4 shadow flex flex-col sm:flex-row gap-4 items-center">
+            <img src="{{product.thumbnails.[0]}}" alt="{{product.title}}" class="w-32 h-32 object-contain bg-white rounded-lg" />
+
+            <div class="flex-grow text-white space-y-1">
+              <h2 class="text-lg font-bold text-orange-400">{{product.title}}</h2>
+              <p class="text-sm text-gray-400">Categoría: {{product.category}}</p>
+              <p class="text-sm text-gray-400">Precio: <span class="text-green-400 font-semibold">$ {{product.price}}</span></p>
+              <p class="text-sm text-gray-400">Cantidad: x{{quantity}}</p>
+              <p class="text-sm text-gray-400">Subtotal: <span class="text-white font-medium">$ {{calcSubtotal product.price quantity}}</span></p>
+            </div>
+
+            <button
+              class="remove-from-cart text-red-400 hover:text-red-500 text-sm"
+              data-cart-id="{{../cartId}}"
+              data-product-id="{{product._id}}"
+            >
+              Eliminar
+            </button>
+          </div>
+        {{/each}}
+      </div>
+
+      <!-- 📦 Resumen de compra -->
+      <aside class="bg-neutral-800 rounded-2xl p-6 h-fit shadow-xl">
+        <h2 class="text-xl font-bold text-green-400 mb-4">Resumen de compra</h2>
+        <div class="text-white space-y-2 mb-4">
+          {{#each products}}
+            <div class="flex justify-between text-sm">
+              <span>{{product.title}}</span>
+              <span>$ {{calcSubtotal product.price quantity}}</span>
+            </div>
+          {{/each}}
+        </div>
+
+        <div class="border-t border-gray-600 pt-4 text-white font-semibold flex justify-between">
+          <span>Total:</span>
+          <span class="text-green-400">$ {{calcTotal products}}</span>
+        </div>
+
+        <button class="w-full mt-6 bg-orange-500 hover:bg-orange-400 text-white py-2 px-4 rounded transition">
+          Finalizar compra
+        </button>
+      </aside>
+    </div>
+  {{else}}
+    <p class="text-center text-gray-400 text-lg">Tu carrito está vacío 😢</p>
+  {{/if}}
+</div>
